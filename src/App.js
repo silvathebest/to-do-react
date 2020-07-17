@@ -1,14 +1,14 @@
 import React from 'react';
 
 import './App.css';
-import Container from "./components/Container";
+import Layout from "./components/Layout";
 
 function App() {
 
 
   return (
     <div className="App">
-      <Container/>
+      <Layout/>
     </div>
   );
 }
