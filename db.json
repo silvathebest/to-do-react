@@ -1,0 +1,19 @@
+{
+  "todos": [
+    {
+      "id": 0,
+      "title": "Buy a gus",
+      "completed": false
+    },
+    {
+      "id": 1,
+      "title": "Buy a banana",
+      "completed": false
+    },
+    {
+      "title": "test",
+      "completed": false,
+      "id": 2
+    }
+  ]
+}
