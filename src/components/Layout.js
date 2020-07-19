@@ -1,15 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import TodoList from "./TodoList";
-import Context from "../context";
-import {makeStyles} from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from "@material-ui/core/Button";
+import React, {useEffect, useState} from 'react'
 import axios from 'axios'
-import Container from "@material-ui/core/Container";
+import TextField from '@material-ui/core/TextField'
+import TodoList from "./TodoList"
+import Context from "../context"
+import Button from "@material-ui/core/Button"
+import Container from "@material-ui/core/Container"
+import {makeStyles} from '@material-ui/core/styles'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     width: '50%',
+    height: '100%',
     marginTop: '50px',
     boxShadow: '0px 0px 65px 7px rgba(0,0,0,0.44)',
     borderRadius: '10px'
@@ -25,14 +26,18 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '10px'
   },
   addBtn: {
-    marginTop: '10px',
+    marginTop: '30px',
     width: '15%',
     height: '20%'
+  },
+  noTask: {
+    margin: '20px',
+    color: '#3f51b5'
   }
-}));
+}))
 
-export default function Layout() {
-  const classes = useStyles();
+const Layout = () => {
+  const classes = useStyles()
   const [todos, setTodos] = useState([])
   const [title, setTitle] = useState('')
 
@@ -54,7 +59,7 @@ export default function Layout() {
         return todo
       }))
     }).catch(error => {
-      console.log(error);
+      console.log(error)
     })
 
   }
@@ -68,6 +73,7 @@ export default function Layout() {
   }
 
   const editTodo = (event, id) => {
+    if (event.key !== 'Enter') return
     const title = event.target.value
     axios.patch(`${ process.env.REACT_APP_API_URL }/${ id }`, { title }).then(() => {
       setTodos(todos.map(todo => {
@@ -75,7 +81,7 @@ export default function Layout() {
         return todo
       }))
     }).catch(error => {
-      console.log(error);
+      console.log(error)
     })
   }
 
@@ -83,33 +89,41 @@ export default function Layout() {
     setTitle(event.target.value)
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault()
     if (!title) return
-    axios.post(process.env.REACT_APP_API_URL, {
+    await axios.post(process.env.REACT_APP_API_URL, {
       title,
       completed: false
     }).then(res => {
       setTodos(todos.concat([res.data]))
-      setTitle('')
     })
+    setTitle('')
   }
 
   return (
     <Context.Provider value={ { toggleTodo, editTodo, deleteTodo } }>
       <Container className={ classes.container }>
         <form className={ classes.root } onSubmit={ handleSubmit }>
-          <TextField label="Task" onChange={ handleChange } className={ classes.add }/>
+          <TextField
+            label='Task'
+            onChange={ handleChange }
+            value={ title }
+            className={ classes.add }
+          />
           <Button
             color='primary'
-            type="submit"
+            type='submit'
             className={ classes.addBtn }
+            variant='outlined'
           >
             Add
           </Button>
-          <TodoList todos={ todos }/>
+          { todos.length ? (<TodoList todos={ todos }/>) : <p className={ classes.noTask }>No task</p> }
         </form>
       </Container>
     </Context.Provider>
-  );
+  )
 }
+
+export default Layout

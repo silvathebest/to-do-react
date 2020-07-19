@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './App.css';
-import Layout from "./components/Layout";
+import Layout from "./components/Layout"
 
 function App() {
 
@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <Layout/>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
