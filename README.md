@@ -1,6 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-#CRUD todo react+material ui
+
+##CRUD todo react+material ui+json-server
+
 
 ## Used technology:
 <ul>
@@ -8,7 +10,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 <li><a href="https://material-ui.com/">material ui</a></li>
 <li><a href="https://www.npmjs.com/package/axios">axios</a></li>
 </ul>
-
 
 ## Available Scripts
 
