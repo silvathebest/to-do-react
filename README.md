@@ -1,8 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-
-##CRUD todo react+material ui+json-server
-
+<h1>CRUD todo react+material ui+json-server</h1>
 
 ## Used technology:
 <ul>
